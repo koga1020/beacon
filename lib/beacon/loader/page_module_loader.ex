@@ -49,12 +49,13 @@ defmodule Beacon.Loader.PageModuleLoader do
 
     template_ast =
       EEx.compile_string(template,
-        engine: Phoenix.LiveView.HTMLEngine,
+        engine: Phoenix.LiveView.TagEngine,
         line: 1,
         trim: true,
         caller: __ENV__,
         source: template,
-        file: "page-render-#{page_id}"
+        file: "page-render-#{page_id}",
+        tag_handler: Phoenix.LiveView.HTMLEngine
       )
 
     Beacon.Router.add_page(site, path, {page_id, layout_id, template_ast, page_module, component_module})

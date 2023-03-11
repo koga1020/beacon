@@ -36,12 +36,13 @@ defmodule Beacon.Loader.ComponentModuleLoader do
 
     ast =
       EEx.compile_string(body,
-        engine: Phoenix.LiveView.HTMLEngine,
+        engine: Phoenix.LiveView.TagEngine,
         line: 1,
         trim: true,
         caller: __ENV__,
         source: body,
-        file: "component-render-#{name}"
+        file: "component-render-#{name}",
+        tag_handler: Phoenix.LiveView.HTMLEngine
       )
 
     quote do

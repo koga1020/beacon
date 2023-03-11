@@ -30,12 +30,13 @@ defmodule Beacon.Loader.LayoutModuleLoader do
 
     ast =
       EEx.compile_string(layout.body,
-        engine: Phoenix.LiveView.HTMLEngine,
+        engine: Phoenix.LiveView.TagEngine,
         line: 1,
         trim: true,
         caller: __ENV__,
         source: layout.body,
-        file: "layout-render-#{layout.id}"
+        file: "layout-render-#{layout.id}",
+        tag_handler: Phoenix.LiveView.HTMLEngine
       )
 
     quote do
